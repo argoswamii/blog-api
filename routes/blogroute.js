@@ -7,10 +7,17 @@ const {
   updatePost,
 } = require("../controller/gpsp");
 
+const { singup, login, protectRoute } = require("../controller/userauth");
+
 router.get("/posts", getPosts);
-router.post("/posts", createPost);
+router.post("/posts", protectRoute, createPost);
 router.get("/posts/:id", getPostById);
-router.put("/posts/:id", updatePost);
-router.post("/posts/:id", updatePost);
+router.put("/posts/:id", protectRoute, updatePost);
+router.post("/posts/:id", protectRoute, updatePost);
+
+//Auth
+
+router.post("/singup", singup);
+router.post("/login", login);
 
 module.exports = router;
